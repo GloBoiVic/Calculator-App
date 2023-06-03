@@ -1,23 +1,23 @@
 // Set global variables to be manipulated
-let operator = "";
-let previousValue = "";
-let currentValue = "";
+let operator = '';
+let previousValue = '';
+let currentValue = '';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   // store html components when DOM loads
-  let clear = document.querySelector(".clear-btn");
-  let equal = document.querySelector(".equal-btn");
-  let decimal = document.querySelector(".decimal-btn");
+  let clear = document.querySelector('.clear-btn');
+  let equal = document.querySelector('.equal-btn');
+  let decimal = document.querySelector('.decimal-btn');
 
-  let numbers = document.querySelectorAll(".num-btn");
-  let operators = document.querySelectorAll(".operator-btn");
+  let numbers = document.querySelectorAll('.num-btn');
+  let operators = document.querySelectorAll('.operator-btn');
 
-  let previousOutput = document.querySelector(".previous");
-  let currentOutput = document.querySelector(".current");
+  let previousOutput = document.querySelector('.previous');
+  let currentOutput = document.querySelector('.current');
 
   //Loop through number buttons
   numbers.forEach((number) =>
-    number.addEventListener("click", function (e) {
+    number.addEventListener('click', function (e) {
       handleNumber(e.target.textContent);
       currentOutput.textContent = currentValue;
     })
@@ -25,34 +25,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Loop through operator
   operators.forEach((op) =>
-    op.addEventListener("click", function (e) {
+    op.addEventListener('click', function (e) {
       handleOperator(e.target.textContent);
-      previousOutput.textContent = previousValue + " " + operator;
+      previousOutput.textContent = previousValue + ' ' + operator;
       currentOutput.textContent = currentValue;
     })
   );
 
-  clear.addEventListener("click", function () {
-    previousValue = "";
-    currentValue = "";
-    operator = "";
+  clear.addEventListener('click', function () {
+    previousValue = '';
+    currentValue = '';
+    operator = '';
     previousOutput.textContent = currentValue;
     currentOutput.textContent = currentValue;
   });
 
-  equal.addEventListener("click", function () {
-    if (currentValue != "" && previousValue != "") {
+  equal.addEventListener('click', function () {
+    if (currentValue != '' && previousValue != '') {
       calculate();
-      previousOutput.textContent = "";
+      previousOutput.textContent = '';
       if (previousValue.length <= 5) {
         currentOutput.textContent = previousValue;
       } else {
-        currentOutput.textContent = previousValue.slice(0, 5) + "...";
+        currentOutput.textContent = previousValue.slice(0, 5) + '...';
       }
     }
   });
 
-  decimal.addEventListener("click", function () {
+  decimal.addEventListener('click', function () {
     addDecimal();
   });
 });
@@ -68,7 +68,7 @@ function handleNumber(num) {
 function handleOperator(op) {
   operator = op;
   previousValue = currentValue;
-  currentValue = "";
+  currentValue = '';
 }
 
 // Adds calculation functionality
@@ -76,12 +76,12 @@ function calculate() {
   previousValue = Number(previousValue);
   currentValue = Number(currentValue);
 
-  if (operator === "+") {
+  if (operator === '+') {
     previousValue += currentValue;
     console.log(previousValue, currentValue);
-  } else if (operator === "-") {
+  } else if (operator === '-') {
     previousValue -= currentValue;
-  } else if (operator === "x") {
+  } else if (operator === 'x') {
     previousValue *= currentValue;
   } else {
     previousValue /= currentValue;
@@ -99,7 +99,7 @@ function roundNumber(num) {
 
 // Make decimal btn work
 function addDecimal() {
-  if (!currentValue.includes(".")) {
-    currentValue += ".";
+  if (!currentValue.includes('.')) {
+    currentValue += '.';
   }
 }

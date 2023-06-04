@@ -1,105 +1,74 @@
-// Set global variables to be manipulated
-let operator = '';
+const add = function (a, b) {
+  return a + b;
+};
+
+const subtract = function (a, b) {
+  return a - b;
+};
+
+const divide = function (a, b) {
+  if (a === 0 || b === 0) {
+    return 'Cannot divide with zero';
+  } else {
+    return a / b;
+  }
+};
+
+const multiply = function (a, b) {
+  return a * b;
+};
+
 let previousValue = '';
+let operator = '';
 let currentValue = '';
 
-document.addEventListener('DOMContentLoaded', function () {
-  // store html components when DOM loads
-  let clear = document.querySelector('.clear-btn');
-  let equal = document.querySelector('.equal-btn');
-  let decimal = document.querySelector('.decimal-btn');
+function operate(operator, num1, num2) {
+  if (operator === 'add') return add(num1, num2);
+  if (operator === 'subtract') return subtract(num1, num2);
+  if (operator === 'divide') return divide(num1, num2);
+  if (operator === 'multiply') return multiply(num1, num2);
+}
 
-  let numbers = document.querySelectorAll('.num-btn');
-  let operators = document.querySelectorAll('.operator-btn');
+// DOM Elements;
+const numBtns = document.querySelectorAll('.num-btn');
+const operatorBtn = document.querySelectorAll('.operator-btn');
+const clearBtn = document.querySelector('.clear-btn');
+const equalBtn = document.querySelector('.equal-btn');
+const calculatorScreen = document.querySelector('.calculator-screen');
+const previousOutput = document.querySelector('.previous');
+const currentOutput = document.querySelector('.current');
 
-  let previousOutput = document.querySelector('.previous');
-  let currentOutput = document.querySelector('.current');
-
-  //Loop through number buttons
-  numbers.forEach((number) =>
-    number.addEventListener('click', function (e) {
+const handleNumBtns = function () {
+  numBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
       handleNumber(e.target.textContent);
       currentOutput.textContent = currentValue;
-    })
-  );
+    });
+  });
+};
 
-  //Loop through operator
-  operators.forEach((op) =>
-    op.addEventListener('click', function (e) {
+const handleOperatorBtns = function () {
+  operatorBtn.forEach((operator) => {
+    operator.addEventListener('click', (e) => {
       handleOperator(e.target.textContent);
       previousOutput.textContent = previousValue + ' ' + operator;
       currentOutput.textContent = currentValue;
-    })
-  );
-
-  clear.addEventListener('click', function () {
-    previousValue = '';
-    currentValue = '';
-    operator = '';
-    previousOutput.textContent = currentValue;
-    currentOutput.textContent = currentValue;
+    });
   });
+};
 
-  equal.addEventListener('click', function () {
-    if (currentValue != '' && previousValue != '') {
-      calculate();
-      previousOutput.textContent = '';
-      if (previousValue.length <= 5) {
-        currentOutput.textContent = previousValue;
-      } else {
-        currentOutput.textContent = previousValue.slice(0, 5) + '...';
-      }
-    }
-  });
+const handleNumber = function (num) {
+  if (currentValue.length <= 5) currentValue += num;
+};
 
-  decimal.addEventListener('click', function () {
-    addDecimal();
-  });
-});
-
-//Restrict display to show only 5 numbers
-function handleNumber(num) {
-  if (currentValue.length <= 5) {
-    currentValue += num;
-  }
-}
-
-// Makes operator buttons work
-function handleOperator(op) {
+const handleOperator = function (op) {
   operator = op;
   previousValue = currentValue;
   currentValue = '';
-}
+};
 
-// Adds calculation functionality
-function calculate() {
-  previousValue = Number(previousValue);
-  currentValue = Number(currentValue);
+handleNumBtns();
+handleOperatorBtns();
+// handleBtns();
 
-  if (operator === '+') {
-    previousValue += currentValue;
-    console.log(previousValue, currentValue);
-  } else if (operator === '-') {
-    previousValue -= currentValue;
-  } else if (operator === 'x') {
-    previousValue *= currentValue;
-  } else {
-    previousValue /= currentValue;
-  }
-
-  previousValue = roundNumber(previousValue);
-  previousValue = previousValue.toString();
-  currentValue = previousValue.toString();
-}
-
-// Rounds numbers
-function roundNumber(num) {
-  return Math.round(num * 1000) / 1000;
-}
-
-// Make decimal btn work
-function addDecimal() {
-  if (!currentValue.includes('.')) {
-    currentValue += '.';
-  }
-}
+// console.log(numBtns);

@@ -13,18 +13,25 @@
     />
     <title>Majestic Calculator</title>
   </head>
+
   <body>
     <h1>The Majestic Calculator</h1>
     <div class="calculator">
       <div class="calculator-screen">
         <div class="previous"></div>
-        <div class="current"></div>
+        <div class="current">0</div>
       </div>
       <div class="calculator-btns">
-        <button class="calculator-btn operator-btn">+</button>
-        <button class="calculator-btn operator-btn">-</button>
-        <button class="calculator-btn operator-btn">&times;</button>
-        <button class="calculator-btn operator-btn">&divide;</button>
+        <button class="calculator-btn operator-btn" data-action="add">+</button>
+        <button class="calculator-btn operator-btn" data-action="subtract">
+          -
+        </button>
+        <button class="calculator-btn operator-btn" data-action="multiply">
+          &times;
+        </button>
+        <button class="calculator-btn operator-btn" data-action="divide">
+          &divide;
+        </button>
         <button class="calculator-btn num-btn">7</button>
         <button class="calculator-btn num-btn">8</button>
         <button class="calculator-btn num-btn">9</button>
@@ -35,9 +42,13 @@
         <button class="calculator-btn num-btn">2</button>
         <button class="calculator-btn num-btn">3</button>
         <button class="calculator-btn num-btn">0</button>
-        <button class="calculator-btn decimal-btn">.</button>
-        <button class="calculator-btn clear-btn">AC</button>
-        <button class="calculator-btn equal-btn">=</button>
+        <button class="calculator-btn decimal-btn" data-action="decimal">
+          .
+        </button>
+        <button class="calculator-btn clear-btn" data-action="clear">AC</button>
+        <button class="calculator-btn equal-btn" data-action="calculate">
+          =
+        </button>
       </div>
     </div>
     <script src="script.js"></script>
